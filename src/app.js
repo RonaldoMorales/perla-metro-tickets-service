@@ -2,19 +2,22 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-// Imports database config
+// Import database configuration
 const connectDB = require('./config/database');
+
+// Import model for testing
+const Ticket = require('./models/Ticket');
 
 const app = express();
 
-// Conects Database
+// Connect to database
 connectDB();
 
-// Basic Middlewares
+// Basic middlewares
 app.use(cors());
 app.use(express.json());
 
-// Testing Route
+// Test route
 app.get('/', (req, res) => {
   res.json({ 
     message: 'Tickets Service is running!',
@@ -24,7 +27,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health Route
+// Health check route
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK',
