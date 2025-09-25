@@ -5,8 +5,8 @@ require('dotenv').config();
 // Import database configuration
 const connectDB = require('./config/database');
 
-// Import model for testing
-const Ticket = require('./models/Ticket');
+// Import routes
+const ticketRoutes = require('./routes/ticketRoutes');
 
 const app = express();
 
@@ -17,13 +17,19 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+// API Routes
+app.use('/api/tickets', ticketRoutes);
+
 // Test route
 app.get('/', (req, res) => {
   res.json({ 
     message: 'Tickets Service is running!',
     service: 'perla-metro-tickets-service',
     timestamp: new Date().toISOString(),
-    database: 'MongoDB connected'
+    database: 'MongoDB connected',
+    endpoints: {
+      tickets: '/api/tickets'
+    }
   });
 });
 
@@ -42,6 +48,7 @@ const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`🚇 Tickets Service running on port ${PORT}`);
   console.log(`🌐 Access at: http://localhost:${PORT}`);
+  console.log(`📋 API endpoints: http://localhost:${PORT}/api/tickets`);
 });
 
 module.exports = app;
