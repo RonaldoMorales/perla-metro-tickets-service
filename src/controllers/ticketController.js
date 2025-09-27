@@ -24,7 +24,7 @@ const createTicket = async (req, res) => {
       });
     }
 
-    // Validate amount
+    // Validate ammount
     if (typeof amount !== 'number' || amount <= 0) {
       return res.status(400).json({
         success: false,
@@ -97,8 +97,7 @@ const getAllTickets = async (req, res) => {
 
     const formattedTickets = tickets.map(ticket => ({
       id: ticket._id,
-      userId: ticket.userId, 
-      userNamePlaceholder: 'Usuario ' + ticket.userId.slice(-4),
+      userId: ticket.userId,
       ticketType: ticket.ticketType,
       status: ticket.status,
       amount: ticket.amount,
@@ -127,6 +126,11 @@ const getAllTickets = async (req, res) => {
 const getTicketById = async (req, res) => {
   try {
     const { id } = req.params;
+    
+    // Debug 
+    console.log('Looking for ticket with ID:', id);
+    console.log('ID type:', typeof id);
+    console.log('ID length:', id.length);
 
     const ticket = await Ticket.findOne({ _id: id, isActive: true });
 
@@ -146,7 +150,6 @@ const getTicketById = async (req, res) => {
         amount: ticket.amount,
         createdAt: ticket.createdAt,
         updatedAt: ticket.updatedAt
-    
       }
     });
 
@@ -186,7 +189,7 @@ const updateTicket = async (req, res) => {
       });
     }
 
-    // Validate that we cant reactivate expired tickets
+    // Validate that expired tickets can't be reactivated
     if (ticket.status === 'caducado' && status === 'activo') {
       return res.status(400).json({
         success: false,
@@ -202,7 +205,7 @@ const updateTicket = async (req, res) => {
       });
     }
 
-    // Validate amount
+    // Validate ammount
     if (amount !== undefined && (typeof amount !== 'number' || amount <= 0)) {
       return res.status(400).json({
         success: false,
@@ -242,7 +245,7 @@ const updateTicket = async (req, res) => {
 
 /**
  * Delete ticket (soft delete)
- * Marks ticket as inactive instead of physically deleting it
+ * Marks ticket as inactive 
  */
 const deleteTicket = async (req, res) => {
   try {
