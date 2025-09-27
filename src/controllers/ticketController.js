@@ -24,7 +24,7 @@ const createTicket = async (req, res) => {
       });
     }
 
-    // Validate ammount
+    // Validate amount
     if (typeof amount !== 'number' || amount <= 0) {
       return res.status(400).json({
         success: false,
@@ -98,6 +98,7 @@ const getAllTickets = async (req, res) => {
     const formattedTickets = tickets.map(ticket => ({
       id: ticket._id,
       userId: ticket.userId,
+      passengerName: "Pendiente desde User Service", // To be resolved by API Main
       ticketType: ticket.ticketType,
       status: ticket.status,
       amount: ticket.amount,
@@ -150,6 +151,7 @@ const getTicketById = async (req, res) => {
         amount: ticket.amount,
         createdAt: ticket.createdAt,
         updatedAt: ticket.updatedAt
+        
       }
     });
 
@@ -205,7 +207,7 @@ const updateTicket = async (req, res) => {
       });
     }
 
-    // Validate ammount
+    // Validate amount
     if (amount !== undefined && (typeof amount !== 'number' || amount <= 0)) {
       return res.status(400).json({
         success: false,
@@ -245,7 +247,7 @@ const updateTicket = async (req, res) => {
 
 /**
  * Delete ticket (soft delete)
- * Marks ticket as inactive 
+ * Marks ticket as inactive instead of physically deleting it
  */
 const deleteTicket = async (req, res) => {
   try {
