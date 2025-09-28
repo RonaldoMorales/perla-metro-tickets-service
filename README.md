@@ -30,7 +30,35 @@ cd perla-metro-tickets-service
 
 # Install dependencies
 npm install
+```
 
+## 🗄️ MongoDB Atlas Setup
+
+### Create Free MongoDB Atlas Account:
+1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+2. Sign up for free account
+3. Choose "Build a database" → "FREE" (M0)
+4. Select cloud provider and region (AWS recommended)
+5. Create cluster (takes 2-3 minutes)
+
+### Configure Database Access:
+1. Go to "Database Access" → "Add New Database User"
+2. Create username and password (save these!)
+3. Set role to "Read and write to any database"
+
+### Configure Network Access:
+1. Go to "Network Access" → "Add IP Address"
+2. Choose "Allow access from anywhere" (0.0.0.0/0)
+3. Or add your specific IP address
+
+### Get Connection String:
+1. Go to "Database" → "Connect"
+2. Choose "Drivers" → Node.js
+3. Copy connection string
+4. Replace `<password>` with your actual password
+
+### Configure Environment Variables:
+```bash
 # Configure environment variables
 cp .env.example .env
 # Edit .env with your actual values
@@ -60,7 +88,7 @@ npm run seed
 
 ## 📚 API Endpoints
 
-**Base URL:** `http://localhost:3002` (local) | `https://perla-metro-tickets-service.onrender.com/` (production)
+**Base URL:** `http://localhost:3002` (local) | `https://perla-metro-tickets-service.onrender.com/` (RonaldoMorales's production)
 
 ### Health Check
 ```http
