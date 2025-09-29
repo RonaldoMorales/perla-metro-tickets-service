@@ -25,7 +25,7 @@ Microservice for ticket management in Antofagasta's subway transportation system
 
 ```bash
 # Clone repository
-git clone https://github.com/RonaldoMorales/perla-metro-tickets-service
+git clone https://github.com/RonaldoMorales/perla-metro-tickets-service.git
 cd perla-metro-tickets-service
 
 # Install dependencies
